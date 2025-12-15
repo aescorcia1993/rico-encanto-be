@@ -9,10 +9,11 @@ export const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
+    const user = jwt.verify(token, process.env.JWT_SECRET || 'tu_clave_secreta_jwt_muy_segura_cambiar_en_produccion');
     req.user = user;
     next();
   } catch (error) {
     return res.status(403).json({ error: 'Invalid or expired token' });
   }
 };
+
