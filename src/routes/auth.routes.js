@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
     // Generar token
     const token = jwt.sign(
       { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
+      'rico-encanto-secret-key-2025-production',
       { expiresIn: '24h' }
     );
 
@@ -52,7 +52,7 @@ router.get('/verify', async (req, res) => {
       return res.status(401).json({ error: 'Token no proporcionado' });
     }
 
-    const user = jwt.verify(token, process.env.JWT_SECRET);
+    const user = jwt.verify(token, 'rico-encanto-secret-key-2025-production');
     res.json({ valid: true, user });
   } catch (error) {
     res.status(403).json({ valid: false, error: 'Token inválido' });
@@ -60,3 +60,4 @@ router.get('/verify', async (req, res) => {
 });
 
 export default router;
+
